@@ -2102,7 +2102,7 @@ export const support_data = [
 export const footer_data = [{
   id: "100",
   title: "Company",
-  data: ['About', 'Careers', 'Team', 'FoodVilla One', 'FoodVilla Instamart', 'FoodVilla Genie']
+  data: ['About', 'Careers', 'Team']
 },
 {
   id: "101",
