@@ -9,8 +9,8 @@ const store = configureStore({
         location: locationSlice,
         cart: cartSlice,
         restaurantList: restaurantListSlice,
-        locSearch: locationSearchVisibility
+        locSearch: locationSearchVisibility,
     }
 });
 
-export default store
+export default store;

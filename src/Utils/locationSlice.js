@@ -4,12 +4,12 @@ const locationSlice = createSlice({
     name: "location",
     initialState: {
         locationDetails: [{
-            "pincode": 530028,
-            "area": "Simhachalam",
-            "lat": 17.771678,
-            "lng": 83.245248,
-            "district": "Visakhapatnam",
-            "state": "Andhra Pradesh"
+            "pincode": 302004,
+            "area": "Raja Park",
+            "lat": 26.920980,
+            "lng": 75.794220,
+            "district": "Jaipur",
+            "state": "India"
         }]
     },
     reducers: {
