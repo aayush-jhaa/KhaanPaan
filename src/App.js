@@ -1,79 +1,91 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./Components/Header";
-import Home from "./Components/Home";
-import Search from "./Components/Search";
-import Profile from "./Components/Profile";
-import Cart from "./Components/Cart";
-import Error from "./Components/Error";
-import Orientation from "./Components/Orientation";
+import "./index.css";
+import Body from "./components/Body";
+import Header from "./components/Header";
+import Search from "./components/Search";
+import Offers from "./components/Offers";
+import Help from "./components/Help";
+import SignIn from "./components/SignIn";
+// import Cart from "./components/Cart";
+import Error from "./components/Error";
+import Footer from "./components/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import RestaurantMenu from "./Components/RestaurantMenu";
+import ResMenu from "./components/ResMenu";
 import { Provider } from "react-redux";
-import store from "./Utils/store";
+import store from "./utils/store";
 
-const Help = lazy(() => import('./Components/Help'));
-const App = () => {
-  const [isPortrait, setIsPortrait] = useState(
-    window.matchMedia('(orientation: portrait)').matches
-  );
-  useEffect(() => {
-    const handleOrientationChange = (event) => {
-      setIsPortrait(event.matches);
-    };
-    const mediaQuery = window.matchMedia('(orientation: portrait)');
-    mediaQuery.addEventListener('change', handleOrientationChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleOrientationChange);
-    };
-  }, []);
-  return isPortrait ? (<Orientation />) : (
-    <Provider store={store}>
-      <React.Fragment>
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LocationUnservicable from "./components/LocationUnservicable";
+
+const Cart = lazy(() => import("./components/Cart"));
+
+const App = function () {
+  return (
+    <>
+      <Provider store={store}>
+        <ToastContainer />
         <Header />
         <Outlet />
-      </React.Fragment>
-    </Provider>
+        <Footer />
+      </Provider>
+    </>
   );
 };
 
-const appRouter = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <Error />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Body />,
       },
       {
         path: "search",
         element: <Search />,
       },
+
       {
-        path: "help",
-        element: 
-        <Suspense>
-          <Help />
-        </Suspense>
+        path: "offers",
+        element: <Offers />,
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path: "/help",
+        element: <Help />,
+      },
+      {
+        path: "signIn",
+        element: <SignIn />,
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback={<h1>Loading..........</h1>}>
+            <Cart />
+          </Suspense>
+        ),
       },
       {
-        path: "restaurant/:id",
-        element: <RestaurantMenu />
-      }
+        path: "/restaurant/:resId",
+        element: <ResMenu />,
+      },
+      {
+        path: "/locationUnservicable",
+        element: <LocationUnservicable />,
+      },
     ],
+    
+    errorElement: <Error />,
   },
 ]);
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
 
-export default App
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);

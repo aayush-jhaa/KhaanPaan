@@ -1,16 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import locationSlice from "./locationSlice";
-import cartSlice from "./cartSlice";
-import restaurantListSlice from "./restaurantListSlice";
-import locationSearchVisibility from "./locationSearchVisibilitySlice";
+
+import cartReducer from "./slices/cartSlice";
 
 const store = configureStore({
-    reducer: {
-        location: locationSlice,
-        cart: cartSlice,
-        restaurantList: restaurantListSlice,
-        locSearch: locationSearchVisibility,
-    }
+  reducer: {
+    cart: cartReducer,
+  },
 });
 
 export default store;

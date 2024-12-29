@@ -1,17 +1,36 @@
-import React from "react";
-import { useRouteError, Link } from "react-router-dom";
-import empty404 from "../Images/empty404.webp"
+import { useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Error = () => {
-    const err = useRouteError();
-    return (
-        <div className="flex flex-col items-center justify-start min-h-screen gap-4">
-            <img src={empty404} className="w-auto mt-12 h-[50vh]"></img>
-            <h1 className="text-3xl text-[#282c3f] font-bold pt-5 tracking-tighter">Oops! Page not found.</h1>
-            <h3 className="text-lg font-light leading-6 text-gray-500 pb-2 truncate tracking-tighter">Uh-oh! Looks like the page you are trying to access, doesn't exist. Please start afresh.</h3>
-            <Link to="/" className="px-4 py-2 bg-[#f3730a] text-white rounded-sm font-bold mb-4 hover:shadow-md">GO HOME</Link>
+  const err = useRouteError();
+
+  
+  return (
+    <>
+      <Header />
+      <div className="sm:px-8 m-auto xl:w-[90vw] 2xl:w-[80vw] p-6 overflow-hidden">
+        <div className="flex flex-col sm:flex-row justify-center  items-center my-14 sm:mt-10 ">
+          <img
+            className="sm:w-[500px] sm:h-[400px]"
+            src="https://b.zmtcdn.com/images/z404x2.png?output-format=webp"
+          ></img>
+          <div className="flex  flex-col text-center justify-center pt-12 px-8 ">
+            <h4 className="self-center w-[350px] text-center ">
+              This is a 404 page and we think it's fairly clear You aren't going
+              to find what you're looking for here But we know you're hungry, so
+              don't fret or rage Hit that big red button to go back to our
+              homepage</h4>
+              <Link to={"/"}><button className="self-center w-[150px] my-5 px-4 py-2 rounded-md text-white bg-[#CB202D] text-center">Back to home</button></Link>
+            
+          </div>
         </div>
-    );
+      </div>
+
+      <Footer />
+    </>
+  );
 };
 
 export default Error;
